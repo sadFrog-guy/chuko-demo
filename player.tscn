@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://cldogndrosrnc"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_e2x81"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_86r73"]
+size = Vector3(0.6, 0.6, 0.6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l64w8"]
+albedo_color = Color(1, 0.0705882, 0.0705882, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rwo2o"]
+material = SubResource("StandardMaterial3D_l64w8")
+size = Vector3(0.6, 0.6, 0.6)
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_e2x81")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_86r73")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_rwo2o")

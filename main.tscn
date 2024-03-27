@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://lmfcog4mlo20"]
+
+[ext_resource type="PackedScene" uid="uid://bt0gvmoje0woo" path="res://plus.tscn" id="1_dsott"]
+[ext_resource type="PackedScene" uid="uid://dy10le6i0hxij" path="res://minus.tscn" id="2_4lg8t"]
+[ext_resource type="PackedScene" uid="uid://cldogndrosrnc" path="res://player.tscn" id="3_2v7a4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qoxul"]
+size = Vector3(3, 1, 20)
+
+[sub_resource type="BoxMesh" id="BoxMesh_865k1"]
+size = Vector3(3, 1, 20)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Block" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Block"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.38419e-07, 0)
+shape = SubResource("BoxShape3D_qoxul")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Block"]
+mesh = SubResource("BoxMesh_865k1")
+skeleton = NodePath("../..")
+
+[node name="Plus" parent="." instance=ExtResource("1_dsott")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
+
+[node name="Minus" parent="." instance=ExtResource("2_4lg8t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
+
+[node name="Player" parent="." instance=ExtResource("3_2v7a4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 4)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.897089, 0.44185, 0, -0.44185, 0.897089, 0.0387001, 3.10673, 13.238)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.487996, 0.872846, 0, -0.872846, -0.487996, 2.0387, 5.41271, 0.183724)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
