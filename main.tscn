@@ -1,14 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://lmfcog4mlo20"]
+[gd_scene load_steps=7 format=3 uid="uid://lmfcog4mlo20"]
 
 [ext_resource type="PackedScene" uid="uid://bt0gvmoje0woo" path="res://plus.tscn" id="1_dsott"]
 [ext_resource type="PackedScene" uid="uid://dy10le6i0hxij" path="res://minus.tscn" id="2_4lg8t"]
-[ext_resource type="PackedScene" uid="uid://cldogndrosrnc" path="res://player.tscn" id="3_2v7a4"]
+[ext_resource type="PackedScene" uid="uid://8urlye0nxj1c" path="res://character/Player.tscn" id="4_kwaor"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qoxul"]
 size = Vector3(3, 1, 20)
 
 [sub_resource type="BoxMesh" id="BoxMesh_865k1"]
 size = Vector3(3, 1, 20)
+
+[sub_resource type="Environment" id="Environment_qcn2e"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -28,13 +30,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
 [node name="Minus" parent="." instance=ExtResource("2_4lg8t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
 
-[node name="Player" parent="." instance=ExtResource("3_2v7a4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 4)
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.897089, 0.44185, 0, -0.44185, 0.897089, 0.0387001, 3.10673, 13.238)
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.487996, 0.872846, 0, -0.872846, -0.487996, 2.0387, 5.41271, 0.183724)
 
+[node name="CharacterBody3D" parent="." instance=ExtResource("4_kwaor")]
+transform = Transform3D(-0.999851, 0, 0.0172606, 0, 1, 0, -0.0172606, 0, -0.999851, 0, 0.440109, 9.11229)
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_qcn2e")
