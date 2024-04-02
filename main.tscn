@@ -1,40 +1,41 @@
-[gd_scene load_steps=7 format=3 uid="uid://lmfcog4mlo20"]
+[gd_scene load_steps=8 format=3 uid="uid://lmfcog4mlo20"]
 
 [ext_resource type="PackedScene" uid="uid://bt0gvmoje0woo" path="res://plus.tscn" id="1_dsott"]
 [ext_resource type="PackedScene" uid="uid://dy10le6i0hxij" path="res://minus.tscn" id="2_4lg8t"]
+[ext_resource type="ArrayMesh" uid="uid://cfmo01koyb4a4" path="res://Single Cube/OBJ/Cube_Grass_Single.obj" id="4_7kqo3"]
 [ext_resource type="PackedScene" uid="uid://8urlye0nxj1c" path="res://character/Player.tscn" id="4_kwaor"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_qoxul"]
-size = Vector3(3, 1, 20)
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yqblq"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_865k1"]
-size = Vector3(3, 1, 20)
+[sub_resource type="BoxShape3D" id="BoxShape3D_8smwy"]
+size = Vector3(4.34845, 1.8064, 32.1435)
 
 [sub_resource type="Environment" id="Environment_qcn2e"]
 
 [node name="Node3D" type="Node3D"]
 
-[node name="Block" type="StaticBody3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.07229, 0, 0, 0, 1, 0, 0, 0, 14.9662, -0.264643, -0.0395205, 3.87389)
+mesh = ExtResource("4_7kqo3")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Block"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.38419e-07, 0)
-shape = SubResource("BoxShape3D_qoxul")
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_yqblq")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Block"]
-mesh = SubResource("BoxMesh_865k1")
-skeleton = NodePath("../..")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.274994, 0.00427246, 3.90038)
+shape = SubResource("BoxShape3D_8smwy")
 
 [node name="Plus" parent="." instance=ExtResource("1_dsott")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.64869, 1.2474, 0)
 
 [node name="Minus" parent="." instance=ExtResource("2_4lg8t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.1683, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.487996, 0.872846, 0, -0.872846, -0.487996, 2.0387, 5.41271, 0.183724)
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("4_kwaor")]
-transform = Transform3D(-0.999851, 0, 0.0172606, 0, 1, 0, -0.0172606, 0, -0.999851, 0, 0.440109, 9.11229)
+transform = Transform3D(-0.999851, 0, 0.0172606, 0, 1, 0, -0.0172606, 0, -0.999851, 0, 0.95855, 12.2669)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_qcn2e")
