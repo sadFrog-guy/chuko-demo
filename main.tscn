@@ -31,11 +31,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.64869, 1.2474, 0)
 [node name="Minus" parent="." instance=ExtResource("2_4lg8t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.1683, 0)
 
+[node name="CharacterBody3D" parent="." instance=ExtResource("4_kwaor")]
+transform = Transform3D(-0.955103, 0, 0.296275, 0, 1, 0, -0.296275, 0, -0.955103, 0, 1.03412, 11.0509)
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.487996, 0.872846, 0, -0.872846, -0.487996, 2.0387, 5.41271, 0.183724)
-
-[node name="CharacterBody3D" parent="." instance=ExtResource("4_kwaor")]
-transform = Transform3D(-0.999851, 0, 0.0172606, 0, 1, 0, -0.0172606, 0, -0.999851, 0, 0.95855, 12.2669)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_qcn2e")

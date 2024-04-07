@@ -1,30 +1,50 @@
 extends CharacterBody3D
 
 
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
-
+const SPEED = 3.0
+const JUMP_VELOCITY = 5.0
+const ROTATE = 0.1
+var is_loked = false
+@export var sens_horizontal = 0.3
+@export var sens_vertical = 0.3
+var move_vec = Vector3()
+@onready var camera_mount = $camera_mount
+@onready var AnimPlayer = $untitled/AnimationPlayer
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+func _input(event):
+	if event is InputEventMouseMotion: 
+		rotate_y(deg_to_rad(-event.relative.x * sens_horizontal))
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-
 	# Handle jump.
+	move_vec = move_vec.normalized()
+	if !AnimPlayer.is_playing():
+		is_loked = false
+	# Get the input direction and handle the movement/deceleration.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
+		if AnimPlayer.current_animation != "jump":
+			AnimPlayer.play("jump")
+		is_loked = true
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var input_dir = Input.get_vector("left", "right", "up", "down")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
+		if !is_loked:
+			if AnimPlayer.current_animation != "run":
+				AnimPlayer.play("run")
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 	else:
+		if !is_loked:
+			if AnimPlayer.current_animation != "idle":
+				AnimPlayer.play("idle")
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-
 	move_and_slide()
 
